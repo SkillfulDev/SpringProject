@@ -1,6 +1,7 @@
 package ua.chernonog.springcourse.model;
 
 public class Person {
+    private int id;
     private String fullName;
 
     private int age;
@@ -19,5 +20,13 @@ public class Person {
 
     public void setAge(int age) {
         this.age = age;
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
     }
 }
