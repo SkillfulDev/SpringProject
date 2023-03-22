@@ -1,7 +1,10 @@
 package ua.chernonog.springcourse.model;
 
+import jakarta.validation.constraints.Pattern;
+
 public class Person {
     private int id;
+    @Pattern(regexp = "[А-Я]\\W+\\s[А-Я]\\W+\\s[А-Я]\\W+", message = "Полное имя пользователя должно быть в формате Имя Отчество Фамилия")
     private String fullName;
 
     private int age;

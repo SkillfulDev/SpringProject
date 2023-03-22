@@ -9,28 +9,10 @@
 <div th:each="person:${people}">
 
     <a th:href="@{/people/{id}(id=${person.getId()})}" th:text="${person.getFullName()}">user</a>
-    <ul th:object="${person}">
-        <li>Name: <span th:text="*{fullName}"></span></li>
-        <li>Address: <span th:text="*{age}"></span></li>
-    </ul>
 </div>
+<hr>
 <div>
-    <a th:href="@{/people/new}">Create new User</a>
+    <a th:href="@{/people/new}">Добавить человека</a>
 </div>
 </body>
 </html>
-<!--<!DOCTYPE html>-->
-<!--<html lang="en" xmlns:th="http://www.thymeleaf.org">-->
-<!--<head>-->
-<!--    <meta charset="UTF-8">-->
-<!--    <title>All People</title>-->
-<!--</head>-->
-<!--<body>-->
-<!--<div th:each="person : ${people}">-->
-<!--    <a th:href="@{/people/{id}(id=${person.getId()})}" th:text ="${person.getFullName()}">user</a>-->
-<!--</div>-->
-<!--<div>-->
-<!--    <a th:href="@{/people/new}">Create new User</a>-->
-<!--</div>-->
-<!--</body>-->
-<!--</html>-->
