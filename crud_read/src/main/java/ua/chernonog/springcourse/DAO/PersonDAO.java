@@ -22,7 +22,7 @@ public class PersonDAO {
     }
 
     public void savePerson(Person person) {
-        jdbcTemplate.update("INSERT INTO person (fullname,age) VALUES (?,?) "
+        jdbcTemplate.update("INSERT INTO person (fullname,year) VALUES (?,?) "
                 ,person.getFullName(),person.getYear());
     }
 }
