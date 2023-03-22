@@ -7,7 +7,7 @@ public class Person {
     @Pattern(regexp = "[А-Я]\\W+\\s[А-Я]\\W+\\s[А-Я]\\W+", message = "Полное имя пользователя должно быть в формате Имя Отчество Фамилия")
     private String fullName;
 
-    private int age;
+    private int year;
 
     public String getFullName() {
         return fullName;
@@ -17,13 +17,6 @@ public class Person {
         this.fullName = fullName;
     }
 
-    public int getAge() {
-        return age;
-    }
-
-    public void setAge(int age) {
-        this.age = age;
-    }
 
     public int getId() {
         return id;
@@ -31,5 +24,13 @@ public class Person {
 
     public void setId(int id) {
         this.id = id;
+    }
+
+    public int getYear() {
+        return year;
+    }
+
+    public void setYear(int year) {
+        this.year = year;
     }
 }

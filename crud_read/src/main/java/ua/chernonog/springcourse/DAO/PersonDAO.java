@@ -23,6 +23,6 @@ public class PersonDAO {
 
     public void savePerson(Person person) {
         jdbcTemplate.update("INSERT INTO person (fullname,age) VALUES (?,?) "
-                ,person.getFullName(),person.getAge());
+                ,person.getFullName(),person.getYear());
     }
 }
