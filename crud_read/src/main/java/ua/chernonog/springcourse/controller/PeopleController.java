@@ -1,25 +1,24 @@
 package ua.chernonog.springcourse.controller;
 
 import jakarta.validation.Valid;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 import ua.chernonog.springcourse.DAO.PersonDAO;
 import ua.chernonog.springcourse.model.Person;
+import ua.chernonog.springcourse.util.PersonValidator;
 
 @Controller
 @RequestMapping("/people")
 public class PeopleController {
 
     private final PersonDAO personDAO;
+    private final PersonValidator personValidator;
 
-    public PeopleController(PersonDAO personDAO) {
+    public PeopleController(PersonDAO personDAO, PersonValidator personValidator) {
         this.personDAO = personDAO;
+        this.personValidator = personValidator;
     }
 
     @GetMapping()
@@ -38,10 +37,35 @@ public class PeopleController {
 
     @PostMapping()
     public String createPerson(@ModelAttribute("person") @Valid Person person, BindingResult bindingResult) {
+        personValidator.validate(person, bindingResult);
         if (bindingResult.hasErrors())
             return "people/add";
         personDAO.savePerson(person);
-        return "redirect:people";
+        return "redirect:/people";
     }
+
+    @GetMapping("/{id}")
+    public String edit(@PathVariable("id") int id, Model model) {
+        model.addAttribute("person", personDAO.show(id));
+        return "people/show";
+    }
+
+    @GetMapping("/{id}/edit")
+    public String editPersonPage(@PathVariable("id") int id, Model model) {
+        model.addAttribute("person", personDAO.show(id));
+        return "people/edit";
+    }
+
+    @PatchMapping("/{id}")
+    public String changePerson(@PathVariable("id") int id, @ModelAttribute("person") @Valid Person person,
+                               BindingResult bindingResult) {
+
+        if (bindingResult.hasErrors())
+            return "people/edit";
+        personDAO.changePerson(id, person);
+        return "redirect:/people";
+
+    }
+
 
 }
