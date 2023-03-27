@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+
+<head>
+  <meta charset="UTF-8">
+  <title>Список клиентов</title>
+</head>
+<body>
+<form th:method="POST" th:action="@{/people}" th:object="${person}">
+<div>
+  <label for="name">Введите ФИО</label>
+  <input type="text" th:field="*{fullName}" id="name">
+</div>
+  <div>
+    <label for="year">Введите год рождения</label>
+    <input type="text" th:field="*{year}" id="year">
+  </div>
+  <div>
+    <input type="submit" value="Создать">
+  </div>
+</form>
+</body>
+</html>

@@ -15,7 +15,12 @@ public class PersonDAO {
         this.jdbcTemplate = jdbcTemplate;
     }
 
-    public List<Person> showAllPeople(){
-        return jdbcTemplate.query("Select * from people",new BeanPropertyRowMapper<>(Person.class));
+    public List<Person> showAllPeople() {
+        return jdbcTemplate.query("Select * from people", new BeanPropertyRowMapper<>(Person.class));
+    }
+
+    public void addNewPerson(Person person) {
+        jdbcTemplate.update("insert into people (fullname, year) values(?,?)",
+                person.getFullName(), person.getYear());
     }
 }
