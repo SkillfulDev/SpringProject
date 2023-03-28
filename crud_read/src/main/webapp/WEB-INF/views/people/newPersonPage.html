@@ -3,17 +3,19 @@
 
 <head>
   <meta charset="UTF-8">
-  <title>Список клиентов</title>
+  <title>Создание нового человека</title>
 </head>
 <body>
 <form th:method="POST" th:action="@{/people}" th:object="${person}">
 <div>
   <label for="name">Введите ФИО</label>
   <input type="text" th:field="*{fullName}" id="name">
+  <p style="color: red"  th:if="${#fields.hasErrors('fullName')}" th:errors="*{fullName}" ></p>
 </div>
   <div>
     <label for="year">Введите год рождения</label>
     <input type="text" th:field="*{year}" id="year">
+    <p style="color: red"  th:if="${#fields.hasErrors('year')}" th:errors="*{year}" ></p>
   </div>
   <div>
     <input type="submit" value="Создать">
