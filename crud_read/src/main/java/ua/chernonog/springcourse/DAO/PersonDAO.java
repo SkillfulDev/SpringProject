@@ -32,6 +32,11 @@ public class PersonDAO {
 
     public void changePerson(int id, Person person) {
         jdbcTemplate.update("update person set fullname=?, year=? where id=? ", person.getFullName(),
-                person.getYear(),person.getId());
+                person.getYear(), person.getId());
+    }
+
+    public Optional<Person> getPersonByName(String fullName) {
+        return jdbcTemplate.query("Select * from person where fullname=?", new Object[]{fullName},
+                new BeanPropertyRowMapper<>(Person.class)).stream().findAny();
     }
 }

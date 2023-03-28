@@ -8,14 +8,18 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 import ua.chernonog.springcourse.DAO.PersonDAO;
 import ua.chernonog.springcourse.model.Person;
+import ua.chernonog.springcourse.util.PersonValidator;
 
 @Controller
 @RequestMapping("/people")
 public class PersonController {
+
+    private final PersonValidator personValidator;
     private final PersonDAO personDAO;
 
     @Autowired
-    public PersonController(PersonDAO personDAO) {
+    public PersonController(PersonValidator personValidator, PersonDAO personDAO) {
+        this.personValidator = personValidator;
         this.personDAO = personDAO;
     }
 
@@ -33,6 +37,7 @@ public class PersonController {
 
     @PostMapping()
     public String addNewPerson(@ModelAttribute("person") @Valid Person person, BindingResult bindingResult) {
+        personValidator.validate(person,bindingResult);
         if (bindingResult.hasErrors())
             return "/people/newPersonPage";
         personDAO.addNewPerson(person);
